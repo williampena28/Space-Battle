@@ -31,9 +31,12 @@ let USS_HelloWorld = new Spaceship(20, 5, .7); // our main spaceship
 
 // 6 alien ships 
 // hull, firepower, and accuracy values are all in random using the respective helper functions.
-let alien_ship1 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
-let alien_ship2 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
-let alien_ship3 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
-let alien_ship4 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
-let alien_ship5 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
-let alien_ship6 = new Spaceship(giveHull(), giveFirePower(), giveAccuracy());
+let alien = 
+[
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
+    new Spaceship(giveHull(), giveFirePower(), giveAccuracy())
+]
