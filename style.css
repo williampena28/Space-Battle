@@ -5,9 +5,13 @@ h1{
     font-family: 'Courier New', Courier, monospace;
     color:white;
 }
+h3{
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+}
 #screen{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 #button-inputs{
     display: flex;
@@ -15,6 +19,7 @@ h1{
     justify-content: center;
     align-items: center;
 }
-.btn{
-
+#enemy-ships{
+    display: flex;
+    flex-wrap: wrap;
 }
