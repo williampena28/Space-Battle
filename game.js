@@ -12,12 +12,12 @@ class Spaceship
 
 //Helper functions
 // log game over
-const printGameOver()
+const printGameOver = () =>
 {
-    return "GAME OVER!";
+    return "GAME OVER! refresh the page to start over";
 }
 
-const printWin()
+const printWin = () =>
 {
     return "YOU WIN!";
 }
@@ -54,3 +54,13 @@ let alien =
     new Spaceship(giveHull(), giveFirePower(), giveAccuracy()),
     new Spaceship(giveHull(), giveFirePower(), giveAccuracy())
 ]
+
+// flag variable for the main while loop that runs our game
+let terminate = false;
+
+// this is where the main game will run. When the game is over, stop the while loop until the page is refreshed
+while(!terminate)
+{
+    console.log("test");
+    terminate = true;
+}
