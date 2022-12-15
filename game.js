@@ -6,9 +6,21 @@ class Spaceship
         this.firepower = firepower;
         this.accuracy = accuracy;
     }
+
+
 };
 
 //Helper functions
+// log game over
+const printGameOver()
+{
+    return "GAME OVER!";
+}
+
+const printWin()
+{
+    return "YOU WIN!";
+}
 // returns a number between 3 and 6 using Math.floor() and Math.random()
 const giveHull = () =>
 {
@@ -27,7 +39,8 @@ const giveAccuracy = () =>
     return Math.round((Math.random() * (.81 - .6) + .6) * 10) / 10;
 }
 
-let USS_HelloWorld = new Spaceship(20, 5, .7); // our main spaceship
+// our main spaceship
+let USS_HelloWorld = new Spaceship(20, 5, .7);
 
 // 6 alien ships 
 // hull, firepower, and accuracy values are all in random using the respective helper functions.
