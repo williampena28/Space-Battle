@@ -21,6 +21,7 @@ const printWin()
 {
     return "YOU WIN!";
 }
+
 // returns a number between 3 and 6 using Math.floor() and Math.random()
 const giveHull = () =>
 {

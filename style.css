@@ -1,0 +1,13 @@
+body{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+}
+.button-inputs{
+    display: flex;
+    justify-content: center;
+}
