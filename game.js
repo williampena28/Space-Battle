@@ -7,6 +7,20 @@ class Spaceship
         this.firepower = firepower;
         this.accuracy = accuracy;
     }
+    hit(target)
+    {
+        // if random float between 0 and 1 is less than our accuracy
+        if(Math.random() < this.accuracy) //
+        {
+            // take this.firepower amount health from the target
+            console.log(`${target.constructor.name} has taken a hit for ${this.firepower} damage.`)
+            target.hull -= this.firepower;
+        } else 
+        {
+            console.log(`${target.constructor.name} missed ${this.constructor.name}`)
+        }
+    }
+    
 };
 
 class enemyShips
@@ -35,25 +49,6 @@ enemyFleet.addShip();
 enemyFleet.addShip();
 enemyFleet.addShip();
 
-//Helper functions
-// ship destroyed
-const destroyShip = (enemyList) =>
-{
-    console.log(`Ship has been destroyed. Only ${enemyList.length} to go!`);
-    enemyList.shift();
-}
-
-// log game over
-const printGameOver = () =>
-{
-    return "GAME OVER! refresh the page to start over";
-}
-
-const printWin = () =>
-{
-    return "YOU WIN!";
-}
-
 // our main spaceship
 let USS_HelloWorld = new Spaceship(20, 5, .7);
 
@@ -62,20 +57,67 @@ let USS_HelloWorld = new Spaceship(20, 5, .7);
 let myShip = document.getElementById('my-ship');
 let enemyShip = document.getElementById('enemy-ship');
 
-
-myShip.addEventListener('click', () =>
-{
-    let myShipHull = document.getElementById('my-ship-hull');
-    myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
-})
-
 // main ship elements
 let myShipHull = document.getElementById('my-ship-hull');
-let myShipPower = document.getElementById('my-ship-firepower');
-let myShipAccuracy = document.getElementById('my-ship-accuracy');
 myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
 
 // enemy ship elements
-let enemyShipHull = document.getElementById('enemy-ship-hull');
-let enemyShipPower = document.getElementById('enemy-ship-firewpower');
-let enemyShipAccuracy = document.getElementById('enemy-ship-accuracy');
+let enemyShip1 = document.getElementById('enemy1-hull');
+let enemyShip1img = document.getElementById('enemy1');
+
+// hull display for the respective ships
+myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
+enemyShip1.innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`
+
+
+const startGame = () =>
+{
+    // looping through the enemy space ships
+    for (let i = 0; i < enemyFleet.shipList.length; i++)
+    {
+        // break from the loopo and log that you lost when main ship health is 0 or you win when all ships are destroyed
+        if(USS_HelloWorld.hull <= 0)
+        {
+            console.log("YOU LOSE");
+            break;
+        }
+
+        // flag for our while loop
+        let terminate = false;
+        while(!terminate)
+        {
+            // main ship attacks first
+            USS_HelloWorld.hit(enemyFleet.shipList[i]);
+            
+            //check if ship hull is destroyed (hull <= 0)
+            if(enemyFleet.shipList[i].hull <= 0)
+            {
+                enemyFleet.shipList[i].hull = 0;
+                console.log(`Enemy ship ${i + 1} has been eliminated`);
+
+                // break from the while loop and onto the next index
+                terminate = true;
+            } else
+            {
+                // enemy ship attacks our main ship
+                enemyFleet.shipList[i].hit(USS_HelloWorld);
+            }
+
+            // check if main ship's hull is <= 0
+            if(USS_HelloWorld.hull <= 0)
+            {
+                console.log("Your ship has been destroyed. GAME OVER");
+                terminate = true;
+            }
+
+        }
+
+        // check if all enemy ships have been destroyed
+        if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull <= 0)
+        {
+            console.log("All alien ships have been destroyed. YOU WIN!");
+        }
+    }
+}
+
+startGame();
