@@ -23,6 +23,7 @@ class Spaceship
     
 };
 
+// enemy ship class for the a list of alien ships
 class enemyShips
 {
     constructor(shipList) 
@@ -55,19 +56,19 @@ let USS_HelloWorld = new Spaceship(20, 5, .7);
 //DOM
 // dom elements that grab the containers of both ships
 let myShip = document.getElementById('my-ship');
-let enemyShip = document.getElementById('enemy-ship');
 
-// main ship elements
+// main ship element
 let myShipHull = document.getElementById('my-ship-hull');
-myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
 
 // enemy ship elements
-let enemyShip1 = document.getElementById('enemy1-hull');
-let enemyShip1img = document.getElementById('enemy1');
 
-// hull display for the respective ships
-myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
-enemyShip1.innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`
+// selecting the images and hull of the enemy ships
+let enemyShipImg = document.querySelectorAll('#enemy');
+let enemyShipHullNodeList = document.querySelectorAll('#enemy-hull');
+
+//enemyShipHull into an array for the use of a for loop
+let enemyShipHull = Array.prototype.slice.call(enemyShipHullNodeList);
+
 
 
 const startGame = () =>
@@ -92,7 +93,11 @@ const startGame = () =>
             //check if ship hull is destroyed (hull <= 0)
             if(enemyFleet.shipList[i].hull <= 0)
             {
+                // to avoid seeing a negative representation of hull
                 enemyFleet.shipList[i].hull = 0;
+
+                // change the png when hull = 0;
+                enemyShipImg[i].src = "./enemy_ship_dead.png";
                 console.log(`Enemy ship ${i + 1} has been eliminated`);
 
                 // break from the while loop and onto the next index
@@ -106,6 +111,7 @@ const startGame = () =>
             // check if main ship's hull is <= 0
             if(USS_HelloWorld.hull <= 0)
             {
+                USS_HelloWorld.hull = 0;
                 console.log("Your ship has been destroyed. GAME OVER");
                 terminate = true;
             }
@@ -121,3 +127,12 @@ const startGame = () =>
 }
 
 startGame();
+
+// hull display updates for the respective ships
+
+myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
+
+for(let i = 0; i < enemyFleet.shipList.length; i++)
+{
+    enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
+}
