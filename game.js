@@ -40,7 +40,7 @@ class enemyShips
     }
 }
 
-// alien fleet created and new ships have been put into the array
+// alien fleet created and new ships have been put into the array object.shipList
 let enemyFleet = new enemyShips();
 
 enemyFleet.addShip();
@@ -90,6 +90,7 @@ const startGame = () =>
             // main ship attacks first
             USS_HelloWorld.hit(enemyFleet.shipList[i]);
             
+            
             //check if ship hull is destroyed (hull <= 0)
             if(enemyFleet.shipList[i].hull <= 0)
             {
@@ -116,6 +117,9 @@ const startGame = () =>
                 terminate = true;
             }
 
+            //Update hull for respective ships after the round ends
+            myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
+            enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
         }
 
         // check if all enemy ships have been destroyed
@@ -123,16 +127,9 @@ const startGame = () =>
         {
             console.log("All alien ships have been destroyed. YOU WIN!");
         }
+
     }
+
 }
 
 startGame();
-
-// hull display updates for the respective ships
-
-myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`
-
-for(let i = 0; i < enemyFleet.shipList.length; i++)
-{
-    enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
-}
