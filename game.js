@@ -69,67 +69,53 @@ let enemyShipHullNodeList = document.querySelectorAll('#enemy-hull');
 //enemyShipHull into an array for the use of a for loop
 let enemyShipHull = Array.prototype.slice.call(enemyShipHullNodeList);
 
+// show hull for respective ships on the page
+myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
+enemyShipHull[0].innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`;
 
+// index set to go to our enemy ship list
+let index = 0;
 
-const startGame = () =>
+// event listener so a round is to be complete when our ship is clicked
+myShip.addEventListener('click', () => 
 {
-    // looping through the enemy space ships
-    for (let i = 0; i < enemyFleet.shipList.length; i++)
+    USS_HelloWorld.hit(enemyFleet.shipList[index]);
+
+    if(enemyFleet.shipList[index].hull <= 0)
     {
-        // break from the loopo and log that you lost when main ship health is 0 or you win when all ships are destroyed
-        if(USS_HelloWorld.hull <= 0)
-        {
-            console.log("YOU LOSE");
-            break;
-        }
+        // to avoid seeing a negative representation of hull
+        enemyFleet.shipList[index].hull = 0;
 
-        // flag for our while loop
-        let terminate = false;
-        while(!terminate)
-        {
-            // main ship attacks first
-            USS_HelloWorld.hit(enemyFleet.shipList[i]);
-            
-            
-            //check if ship hull is destroyed (hull <= 0)
-            if(enemyFleet.shipList[i].hull <= 0)
-            {
-                // to avoid seeing a negative representation of hull
-                enemyFleet.shipList[i].hull = 0;
+        // change the png when hull = 0 and update hull html
+        enemyShipImg[index].src = "./enemy_ship_dead.png";
+        enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
+        console.log(`Enemy ship ${index + 1} has been eliminated`);
+        //go to the next enemy ship
+        index++;
 
-                // change the png when hull = 0;
-                enemyShipImg[i].src = "./enemy_ship_dead.png";
-                console.log(`Enemy ship ${i + 1} has been eliminated`);
-
-                // break from the while loop and onto the next index
-                terminate = true;
-            } else
-            {
-                // enemy ship attacks our main ship
-                enemyFleet.shipList[i].hit(USS_HelloWorld);
-            }
-
-            // check if main ship's hull is <= 0
-            if(USS_HelloWorld.hull <= 0)
-            {
-                USS_HelloWorld.hull = 0;
-                console.log("Your ship has been destroyed. GAME OVER");
-                terminate = true;
-            }
-
-            //Update hull for respective ships after the round ends
-            myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
-            enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
-        }
-
-        // check if all enemy ships have been destroyed
-        if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull <= 0)
-        {
-            console.log("All alien ships have been destroyed. YOU WIN!");
-        }
-
+    } else
+    {
+        // enemy ship attacks our main ship
+        enemyFleet.shipList[index].hit(USS_HelloWorld);
     }
 
-}
+        // check if main ship's hull is <= 0
+    if(USS_HelloWorld.hull <= 0)
+    {
+        USS_HelloWorld.hull = 0;
+        console.log("Your ship has been destroyed. GAME OVER");
+    }
 
-startGame();
+    myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
+
+    //show new enemy health
+    if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull != 0)
+    {
+        enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
+    } else 
+    {
+        // check if all enemy ships have been destroyed
+        console.log("All alien ships have been destroyed. YOU WIN!");
+    }
+
+})
