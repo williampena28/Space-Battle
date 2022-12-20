@@ -1,3 +1,22 @@
+//DOM
+// game text element
+let gameText = document.getElementById('text');
+
+// dom elements that grab the containers of both ships
+let myShip = document.getElementById('my-ship');
+
+// main ship element
+let myShipHull = document.getElementById('my-ship-hull');
+
+// enemy ship elements
+
+// selecting the images and hull of the enemy ships
+let enemyShipImg = document.querySelectorAll('#enemy');
+let enemyShipHullNodeList = document.querySelectorAll('#enemy-hull');
+
+//enemyShipHull into an array for the use of a for loop
+let enemyShipHull = Array.prototype.slice.call(enemyShipHullNodeList);
+
 // main class for the space ship since they all have the same propertie
 class Spaceship
 {
@@ -13,11 +32,11 @@ class Spaceship
         if(Math.random() < this.accuracy) //
         {
             // take this.firepower amount health from the target
-            console.log(`${target.constructor.name} has taken a hit for ${this.firepower} damage.`)
+            gameText.innerHTML = `${target.constructor.name} has taken a hit for ${this.firepower} damage.`;
             target.hull -= this.firepower;
         } else 
         {
-            console.log(`${target.constructor.name} missed ${this.constructor.name}`)
+            gameText.innerHTML = `${target.constructor.name} missed ${this.constructor.name}`;
         }
     }
     
@@ -53,28 +72,41 @@ enemyFleet.addShip();
 // our main spaceship
 let USS_HelloWorld = new Spaceship(20, 5, .7);
 
-//DOM
-// dom elements that grab the containers of both ships
-let myShip = document.getElementById('my-ship');
-
-// main ship element
-let myShipHull = document.getElementById('my-ship-hull');
-
-// enemy ship elements
-
-// selecting the images and hull of the enemy ships
-let enemyShipImg = document.querySelectorAll('#enemy');
-let enemyShipHullNodeList = document.querySelectorAll('#enemy-hull');
-
-//enemyShipHull into an array for the use of a for loop
-let enemyShipHull = Array.prototype.slice.call(enemyShipHullNodeList);
-
 // show hull for respective ships on the page
 myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
 enemyShipHull[0].innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`;
 
 // index set to go to our enemy ship list
 let index = 0;
+
+// helper function that resets
+const reset = () =>
+{
+    // reset main ship hull, index, and clearing out the enemy ship array then adding new ones
+    USS_HelloWorld.hull = 20;
+    index = 0;
+    enemyFleet.shipList.length = 0;
+
+    enemyFleet.addShip();
+    enemyFleet.addShip();
+    enemyFleet.addShip();
+    enemyFleet.addShip();
+    enemyFleet.addShip();
+    enemyFleet.addShip();
+
+    // update new hulls
+    myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
+    enemyShipHull[0].innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`;
+
+    // remove x's on each enemy ship
+    for(let i = 0; i < enemyFleet.shipList.length; i++)
+    {
+        // update enemy ship image and hull data
+        enemyShipImg[i].src = "./enemy_ship.png";
+        enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
+    }
+
+}
 
 // event listener so a round is to be complete when our ship is clicked
 myShip.addEventListener('click', () => 
@@ -103,7 +135,9 @@ myShip.addEventListener('click', () =>
     if(USS_HelloWorld.hull <= 0)
     {
         USS_HelloWorld.hull = 0;
-        console.log("Your ship has been destroyed. GAME OVER");
+        alert("Your ship has been destroyed. GAME OVER!");
+        gameText.innerHTML = `You lost! D:`;
+        reset();
     }
 
     myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
@@ -115,7 +149,9 @@ myShip.addEventListener('click', () =>
     } else 
     {
         // check if all enemy ships have been destroyed
-        console.log("All alien ships have been destroyed. YOU WIN!");
+        alert('All alien ships have been destroyed. YOU WIN!');
+        gameText.innerHTML = `You won! :D`;
+        reset();
     }
 
 })
