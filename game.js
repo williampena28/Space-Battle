@@ -79,6 +79,12 @@ enemyShipHull[0].innerHTML = `Hull: ${enemyFleet.shipList[0].hull}`;
 // index set to go to our enemy ship list
 let index = 0;
 
+// show hulls of each enemy ship
+for(let i = 0; i < enemyFleet.shipList.length; i++)
+{
+    enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
+}
+
 // helper function that resets
 const reset = () =>
 {
