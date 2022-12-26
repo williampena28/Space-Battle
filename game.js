@@ -8,8 +8,10 @@ let myShip = document.getElementById('my-ship');
 // main ship element
 let myShipHull = document.getElementById('my-ship-hull');
 
-// enemy ship elements
+// reset button element
+let resetButton = document.getElementById('reset-box');
 
+// enemy ship elements
 // selecting the images and hull of the enemy ships
 let enemyShipImg = document.querySelectorAll('#enemy');
 let enemyShipHullNodeList = document.querySelectorAll('#enemy-hull');
@@ -112,6 +114,8 @@ const reset = () =>
         enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
     }
 
+    resetButton.style.display = "none";
+
 }
 
 // event listener so a round is to be complete when our ship is clicked
@@ -143,21 +147,21 @@ myShip.addEventListener('click', () =>
         USS_HelloWorld.hull = 0;
         alert("Your ship has been destroyed. GAME OVER!");
         gameText.innerHTML = `You lost! D:`;
-        reset();
+        resetButton.style.display = 'block';
     }
 
     myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
 
     //show new enemy health
-    if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull != 0)
-    {
-        enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
-    } else 
+    if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull <= 0)
     {
         // check if all enemy ships have been destroyed
         alert('All alien ships have been destroyed. YOU WIN!');
         gameText.innerHTML = `You won! :D`;
-        reset();
+        resetButton.style.display = 'block';
+    } else 
+    {
+        enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
     }
 
 })

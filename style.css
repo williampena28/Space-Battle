@@ -27,3 +27,9 @@ h3{
     display: flex;
     flex-wrap: wrap;
 }
+#reset-box{
+    display: block;
+}
+#reset-button{
+    
+}
