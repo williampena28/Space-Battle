@@ -28,8 +28,6 @@ h3{
     flex-wrap: wrap;
 }
 #reset-box{
-    display: block;
-}
-#reset-button{
-    
+    display: none;
+    justify-content: center;
 }

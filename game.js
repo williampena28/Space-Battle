@@ -119,7 +119,7 @@ const reset = () =>
 }
 
 // event listener so a round is to be complete when our ship is clicked
-myShip.addEventListener('click', () => 
+myShip.addEventListener('click', () =>
 {
     USS_HelloWorld.hit(enemyFleet.shipList[index]);
 
@@ -147,7 +147,7 @@ myShip.addEventListener('click', () =>
         USS_HelloWorld.hull = 0;
         alert("Your ship has been destroyed. GAME OVER!");
         gameText.innerHTML = `You lost! D:`;
-        resetButton.style.display = 'block';
+        resetButton.style.display = 'flex';
     }
 
     myShipHull.innerHTML = `Hull: ${USS_HelloWorld.hull}`;
@@ -158,7 +158,8 @@ myShip.addEventListener('click', () =>
         // check if all enemy ships have been destroyed
         alert('All alien ships have been destroyed. YOU WIN!');
         gameText.innerHTML = `You won! :D`;
-        resetButton.style.display = 'block';
+        resetButton.style.display = 'flex';
+
     } else 
     {
         enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
