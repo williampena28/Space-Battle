@@ -1,4 +1,9 @@
 //DOM
+
+// audio elements
+
+let victory = document.getElementById('victory_music');
+
 // game text element
 let gameText = document.getElementById('text');
 
@@ -34,7 +39,6 @@ class Spaceship
         if(Math.random() < this.accuracy) //
         {
             // take this.firepower amount health from the target
-            gameText.innerHTML = `${target.constructor.name} has taken a hit for ${this.firepower} damage.`;
             target.hull -= this.firepower;
         } else 
         {
@@ -114,6 +118,8 @@ const reset = () =>
         enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
     }
 
+    gameText.innerHTML = 'Click on HelloWorld to attack!';
+
     resetButton.style.display = "none";
 
 }
@@ -156,6 +162,7 @@ myShip.addEventListener('click', () =>
     if(enemyFleet.shipList[enemyFleet.shipList.length - 1].hull <= 0)
     {
         // check if all enemy ships have been destroyed
+        victory.play();
         alert('All alien ships have been destroyed. YOU WIN!');
         gameText.innerHTML = `You won! :D`;
         resetButton.style.display = 'flex';
