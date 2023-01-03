@@ -4,6 +4,7 @@
 
 let victory = document.getElementById('victory_music');
 let gameOver = document.getElementById('game_over_music');
+let explosion = document.getElementById('explosion_sound');
 
 // game text element
 let gameText = document.getElementById('text');
@@ -115,7 +116,7 @@ const reset = () =>
     for(let i = 0; i < enemyFleet.shipList.length; i++)
     {
         // update enemy ship image and hull data
-        enemyShipImg[i].src = "./enemy_ship.png";
+        enemyShipImg[i].src = "./media/images/enemy_ship.png";
         enemyShipHull[i].innerHTML = `Hull: ${enemyFleet.shipList[i].hull}`;
     }
 
@@ -135,8 +136,9 @@ myShip.addEventListener('click', () =>
         // to avoid seeing a negative representation of hull
         enemyFleet.shipList[index].hull = 0;
 
-        // change the png when hull = 0 and update hull html
-        enemyShipImg[index].src = "./enemy_ship_dead.png";
+        // change the png when hull = 0, update hull html, and play explosion sound
+        explosion.play();
+        enemyShipImg[index].src = "./media/images/enemy_ship_dead.png";
         enemyShipHull[index].innerHTML = `Hull: ${enemyFleet.shipList[index].hull}`;
         console.log(`Enemy ship ${index + 1} has been eliminated`);
         //go to the next enemy ship

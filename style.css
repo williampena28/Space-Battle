@@ -1,5 +1,5 @@
 body{
-    background-color: black;
+    background-image: url('./media/images/background.jpg');
 }
 #text{
     text-align: center;
@@ -30,4 +30,21 @@ h3{
 #reset-box{
     display: none;
     justify-content: center;
+}
+.ship-data{
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: black;
+}
+#my-ship-hull{
+    color: yellow;
+    outline: 2px dashed purple;
+}
+
+.enemy-ship-data{
+    margin-right: 135px;
+    background-color: black;
+}
+#text-box{
+    background-color: black;
 }

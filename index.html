@@ -9,13 +9,14 @@
     <script src="game.js" defer></script>
 </head>
 <body>
-    <audio id="victory_music"><source src="sounds/victory.mp3"></audio>
-    <audio id="game_over_music"><source src="sounds/gameover.mp3"></audio>
+    <audio id="victory_music"><source src="./media/sound/victory.mp3"></audio>
+    <audio id="game_over_music"><source src="./media/sound/gameover.mp3"></audio>
+    <audio id="explosion_sound"><source src="./media/sound/death.mp3"></audio>
 
     <div id="game">
         <div id="screen">
             <div id="my-ship">
-                <img src="./uss_ship.png" alt="main ship">
+                <img src="./media/images/uss_ship.png" alt="main ship">
                 <div class="ship-data">
                     <h1>USS HelloWorld</h1>
                     <h3 id="my-ship-hull"></h3>
@@ -25,51 +26,53 @@
             </div>
             <div id="enemy-ships">
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
                 <div id="enemy-ship">
-                    <img id="enemy" src="./enemy_ship.png" alt="enemy ship">
+                    <img id="enemy" src="./media/images/enemy_ship.png" alt="enemy ship">
                     <div class="enemy-ship-data">
                         <h3 id="enemy-hull"></h3>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="game-text">
-            <h3 id="text">Click on HelloWorld to attack!</h3>
-            <h3 id="text2"></h3>
+        <div id="text-box">
+            <div id="game-text">
+                <h3 id="text">Click on HelloWorld to attack!</h3>
+                <h3 id="text2"></h3>
+            </div>
+            <div id="reset-box">
+                <h3 id="reset-text">Play again?</h3>
+                <button id ="reset-button" onclick=reset()>Reset</button>
+            </div>
         </div>
-        <div id="reset-box">
-            <h3 id="reset-text">Play again?</h3>
-            <button id ="reset-button" onclick=reset()>Reset</button>
-        </div> 
     </div>
 </body>
 </html>
