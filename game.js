@@ -3,6 +3,7 @@
 // audio elements
 
 let victory = document.getElementById('victory_music');
+let gameOver = document.getElementById('game_over_music');
 
 // game text element
 let gameText = document.getElementById('text');
@@ -151,6 +152,7 @@ myShip.addEventListener('click', () =>
     if(USS_HelloWorld.hull <= 0)
     {
         USS_HelloWorld.hull = 0;
+        gameOver.play();
         alert("Your ship has been destroyed. GAME OVER!");
         gameText.innerHTML = `You lost! D:`;
         resetButton.style.display = 'flex';
